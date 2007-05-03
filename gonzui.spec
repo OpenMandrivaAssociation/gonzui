@@ -1,7 +1,8 @@
+%define rel 3
 
 Name:           gonzui
 Version:        1.2
-Release:        %mkrel 2
+Release:        %mkrel %rel
 Summary:        Source code search engine 
 Group:          Development/Other
 License:        GPL
@@ -32,9 +33,6 @@ source code search engine that covers vast quantities of open source codes
 available on the Internet.
 
 %prep
-%{expand:%%define ruby_libdir %(ruby -rrbconfig -e "puts Config::CONFIG['sitelibdir']")}
-%{expand:%%define ruby_archdir %(ruby -rrbconfig -e "puts Config::CONFIG['sitearchdir']")}
-
 %setup -q
 # more than one cvs
 %patch1
@@ -71,8 +69,8 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/%name
 %_bindir/%name-*
 
-%exclude %dir %ruby_archdir
-%{ruby_libdir}/*
+%exclude %dir %ruby_sitearchdir
+%{ruby_sitelibdir}/*
 %_localstatedir/%name
 
 %config(noreplace) %_sysconfdir/%{name}rc*
