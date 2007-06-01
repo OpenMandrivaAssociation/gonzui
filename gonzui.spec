@@ -8,9 +8,9 @@ Group:          Development/Other
 License:        GPL
 URL:            http://gonzui.sourceforge.net/
 Source0:        %{name}-%{version}.tar.bz2
-Source1:        gonzui.init.bz2
-Source2:        gonzuirc.bz2
-Source3:        gonzui.logrotate.bz2
+Source1:        gonzui.init
+Source2:        gonzuirc
+Source3:        gonzui.logrotate
 Patch1:         gonzui-1.2-multi_checkout.diff
 Patch2:         gonzui-1.2-name_tagging.diff 
 Patch3:         gonzui-1.2-svn_ssh.diff 
@@ -52,10 +52,10 @@ available on the Internet.
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 mkdir -p $RPM_BUILD_ROOT/%_initrddir/
-bzcat %SOURCE1 > $RPM_BUILD_ROOT/%_initrddir/%name
-bzcat %SOURCE2 > $RPM_BUILD_ROOT/%_sysconfdir/%{name}rc
+cp %SOURCE1 $RPM_BUILD_ROOT/%_initrddir/%name
+cp %SOURCE2 $RPM_BUILD_ROOT/%_sysconfdir/%{name}rc
 mkdir -p $RPM_BUILD_ROOT/%_sysconfdir/logrotate.d/
-bzcat %SOURCE3 > $RPM_BUILD_ROOT/%_sysconfdir/logrotate.d/%{name}
+cp %SOURCE3 $RPM_BUILD_ROOT/%_sysconfdir/logrotate.d/%{name}
 
 mkdir -p $RPM_BUILD_ROOT/%_localstatedir/%name
 %clean
