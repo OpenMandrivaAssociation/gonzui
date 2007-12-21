@@ -14,6 +14,7 @@ Source3:        gonzui.logrotate
 Patch1:         gonzui-1.2-multi_checkout.diff
 Patch2:         gonzui-1.2-name_tagging.diff 
 Patch3:         gonzui-1.2-svn_ssh.diff 
+BuildRoot:      %{_tmppath}/%{name}-%{version}-root
 BuildRequires:  ruby-devel ruby-bdb
 Requires:       ruby-bdb
 Requires(pre):     rpm-helper
