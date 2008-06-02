@@ -57,7 +57,7 @@ cp %SOURCE2 $RPM_BUILD_ROOT/%_sysconfdir/%{name}rc
 mkdir -p $RPM_BUILD_ROOT/%_sysconfdir/logrotate.d/
 cp %SOURCE3 $RPM_BUILD_ROOT/%_sysconfdir/logrotate.d/%{name}
 
-mkdir -p $RPM_BUILD_ROOT/%_localstatedir/%name
+mkdir -p $RPM_BUILD_ROOT/%_localstatedir/lib/%name
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -71,7 +71,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %exclude %dir %ruby_sitearchdir
 %{ruby_sitelibdir}/*
-%_localstatedir/%name
+%_localstatedir/lib/%name
 
 %config(noreplace) %_sysconfdir/%{name}rc*
 %config(noreplace) %_sysconfdir/logrotate.d/*
