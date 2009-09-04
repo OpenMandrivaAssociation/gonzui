@@ -1,4 +1,4 @@
-%define rel 4
+%define rel 5
 
 Name:           gonzui
 Version:        1.2
