@@ -11,6 +11,7 @@ Source0:        %{name}-%{version}.tar.bz2
 Source1:        gonzui.init
 Source2:        gonzuirc
 Source3:        gonzui.logrotate
+Patch0:		gonzui-1.2-fix-link.patch
 Patch1:         gonzui-1.2-multi_checkout.diff
 Patch2:         gonzui-1.2-name_tagging.diff 
 Patch3:         gonzui-1.2-svn_ssh.diff 
@@ -34,6 +35,7 @@ available on the Internet.
 
 %prep
 %setup -q
+%patch0 -p0
 # more than one cvs
 %patch1
 # --name
@@ -42,7 +44,8 @@ available on the Internet.
 %patch3
 
 %build
-%configure
+autoreconf -fi
+%configure2_5x
 %make
 
 %check
@@ -64,7 +67,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc doc README AUTHORS ChangeLog NEWS
-%config(noreplace)    %_sysconfdir/%{name}rc
+%config(noreplace)    %_sysconfdir/%{name}rc*
 %attr(0755,root,root) %_initrddir/%{name}
 %_datadir/%name
 %_bindir/%name-*
@@ -73,7 +76,6 @@ rm -rf $RPM_BUILD_ROOT
 %{ruby_sitelibdir}/*
 %_localstatedir/lib/%name
 
-%config(noreplace) %_sysconfdir/%{name}rc*
 %config(noreplace) %_sysconfdir/logrotate.d/*
 
 %pre
