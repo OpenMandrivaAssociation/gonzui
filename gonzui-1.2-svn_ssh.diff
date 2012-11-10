@@ -1,0 +1,13 @@
+Index: gonzui/fetcher.rb
+Allow to fetch by svn+ssh if you specify ssh as a uri scheme
+===================================================================
+--- gonzui/fetcher.rb
++++ gonzui/fetcher.rb	2005-11-03 16:26:53.000000000 +0100
+@@ -269,6 +269,7 @@
+       assert_non_nil(mozule)
+       uri = @source_uri.dup
+       uri.scheme = query["original_scheme"] if query["original_scheme"]
++      uri.scheme = "svn+" + uri.scheme if uri.scheme == "ssh"
+       uri.query = nil
+       root = uri.to_s
+       # FIXME: kludge for replacing file:/home/... ->

@@ -1,0 +1,20 @@
+--- acinclude.m4.link	2010-02-18 09:18:11.000000000 +0100
++++ acinclude.m4	2010-02-18 09:18:45.000000000 +0100
+@@ -53,8 +53,8 @@
+   RUBY_LDSHARED="`ruby -rmkmf -e 'puts Config::MAKEFILE_CONFIG["LDSHARED"]'`"
+   RUBY_CFLAGS="`ruby -rmkmf -e 'puts Config::MAKEFILE_CONFIG["CFLAGS"]'`"
+   RUBY_DLEXT="`ruby -rmkmf -e 'puts Config::MAKEFILE_CONFIG["DLEXT"]'`"
+-  RUBY_DLDFLAGS="`ruby -rmkmf -e 'puts Config::MAKEFILE_CONFIG["DLDFLAGS"]'`"
+-  RUBY_LIBS="`ruby -rmkmf -e 'puts Config::MAKEFILE_CONFIG["LIBS"]'`"
++  RUBY_DLDFLAGS="`ruby -rmkmf -e 'puts Config::MAKEFILE_CONFIG["DLDFLAGS"]'` \$(LDFLAGS)"
++  RUBY_LIBS="`ruby -rmkmf -e 'puts Config::MAKEFILE_CONFIG["LIBS"]'` -lruby"
+   RUBY_HDRHDIR="`ruby -rmkmf -e 'puts Config::CONFIG["archdir"]'`"
+   RUBY_CPPFLAGS='-I. -I$(RUBY_HDRHDIR)'
+   changequote([, ])
+@@ -118,4 +118,4 @@
+      [GROUP=${withval}], [GROUP='root']
+  )
+  AC_SUBST(GROUP)
+-])
+\ No newline at end of file
++])

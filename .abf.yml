@@ -1,0 +1,5 @@
+sources:
+  "gonzui-1.2.tar.bz2:"	e0dd6ba221721de9efffc5912aef12c67849297d
+  "gonzui.init:"	a95d5ec99b6e629848f5fc45e68b289627bd2b94
+  "gonzui.logrotate:"	13b52ab1c973de1892a05e34a9f085086131c404
+  "gonzuirc:"	f558fddcf6b6843e81dafd7d85c9e85e747cf50b

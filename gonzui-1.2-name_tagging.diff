@@ -1,0 +1,65 @@
+Index: gonzui-import
+Add a --name option, used to give a different name from cvs ( in cas the name
+is not clear enough, or in case there is 2 cvs with the same name ).
+
+
+===================================================================
+--- gonzui-import
++++ gonzui-import	2005-11-03 16:36:11.000000000 +0100
+@@ -24,6 +24,7 @@
+     puts "  -a, --apt PACKAGE...           use apt-get to get a source package"
+     puts "      --cvs REPOSITORY MODULE    use cvs to get a source tree"
+     puts "      --svn REPOSITORY MODULE    use svn to get a source tree"
++    puts "      --name=NAME                use NAME in the interface"
+     puts "      --exclude=PATTERN          exclude files matching PATTERN"
+     puts "                                 [#{@config.exclude_pattern.to_s}]"
+     puts "      --no-utf8                  don't convert files to UTF-8"
+@@ -39,6 +40,7 @@
+       ['--svn',                 GetoptLong::NO_ARGUMENT],
+       ['--no-utf8',             GetoptLong::NO_ARGUMENT],
+       ['--exclude',             GetoptLong::REQUIRED_ARGUMENT],
++      ['--name',                GetoptLong::REQUIRED_ARGUMENT],
+       ['--list-archives',       GetoptLong::NO_ARGUMENT],
+     ]
+     LangScan.modules.each {|m|
+@@ -71,7 +73,7 @@
+     @use_apt = if options["apt"] then true else false end
+     @use_cvs = if options["cvs"] then true else false end
+     @use_svn = if options["svn"] then true else false end
+-
++    @name = options["name"]
+     @config.utf8 = false if options["no-utf8"]
+     if options["exclude"]
+       @config.exclude_pattern = Regexp.new(options["exclude"]) 
+@@ -146,8 +148,10 @@
+     lower_priority
+ 
+     show_progress = if @config.quiet then false else true end
++    # name = if 
+     importer = Importer.new(@config, 
+-                            :show_progress => show_progress)
++                            :show_progress => show_progress,
++                            :name => @name)
+     begin
+       @target_names.each {|target_name|
+         import(importer, target_name)
+Index: gonzui/importer.rb
+===================================================================
+--- gonzui/importer.rb
++++ gonzui/importer.rb	2005-11-03 16:38:02.000000000 +0100
+@@ -18,6 +18,7 @@
+     def initialize(config, options = {})
+       super(config, options)
+       # to be initialized
++      @name = options[:name] 
+       @last_package_name = nil
+     end
+     attr_reader :last_package_name
+@@ -25,6 +26,7 @@
+     private
+     def import_package(fetcher, source_uri)
+       package_name = fetcher.package_name
++      package_name = @name if @name 
+       raise ImporterError.new("#{package_name}: already exists") if 
+         @dbm.has_package?(package_name)
+
