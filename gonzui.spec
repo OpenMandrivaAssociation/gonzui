@@ -6,7 +6,7 @@ Release:        %mkrel %rel
 Summary:        Source code search engine 
 Group:          Development/Other
 License:        GPL
-URL:            http://gonzui.sourceforge.net/
+URL:            https://gonzui.sourceforge.net/
 Source0:        %{name}-%{version}.tar.bz2
 Source1:        gonzui.init
 Source2:        gonzuirc
