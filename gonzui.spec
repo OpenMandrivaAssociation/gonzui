@@ -2,7 +2,7 @@
 
 Name:           gonzui
 Version:        1.2
-Release:        %mkrel %rel
+Release:        %rel.1
 Summary:        Source code search engine 
 Group:          Development/Other
 License:        GPL
